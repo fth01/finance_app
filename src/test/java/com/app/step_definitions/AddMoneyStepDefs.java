@@ -25,7 +25,7 @@ public class AddMoneyStepDefs {
     }
     @When("User enters the card number")
     public void user_enters_the_card_number() {
-        new AddMoneyPage().cardNumberInput.sendKeys(ConfigurationReader.get("cardNumber"));
+        new AddMoneyPage().cardNumberInput.sendKeys(Utils.decrypt(ConfigurationReader.get("cardNumber")));
     }
     @When("User enters card holder")
     public void user_enters_card_holder() {
@@ -34,11 +34,11 @@ public class AddMoneyStepDefs {
     }
     @When("User enter expiry date")
     public void user_enter_expiry_date() {
-        new AddMoneyPage().expiryDateInput.sendKeys(ConfigurationReader.get("expiryDate"));
+        new AddMoneyPage().expiryDateInput.sendKeys(Utils.decrypt(ConfigurationReader.get("expiryDate")));
     }
     @When("User enters ccv number")
     public void user_enters_ccv_number() {
-        new AddMoneyPage().cvvInput.sendKeys(ConfigurationReader.get("cvv"));
+        new AddMoneyPage().cvvInput.sendKeys(Utils.decrypt(ConfigurationReader.get("cvv")));
     }
     @When("User enters amount {string}")
     public void user_enters_amount(String amount) {

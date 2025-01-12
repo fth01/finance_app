@@ -17,7 +17,7 @@ public class LoginStepDefs {
     @When("User enters the valid credentials")
     public void user_enters_the_valid_credentials() {
         String username = ConfigurationReader.get("username");
-        String password = ConfigurationReader.get("password");
+        String password = Utils.decrypt(ConfigurationReader.get("password"));
         new LoginPage().login(username, password);
     }
     @Then("Dashboard should be displayed")

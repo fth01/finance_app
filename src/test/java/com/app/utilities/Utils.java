@@ -8,11 +8,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.junit.Assert;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -394,6 +397,30 @@ public class Utils {
      */
     public static void waitForPresenceOfElement(By by, long time) {
         new WebDriverWait(TestDriver.get(), Duration.ofSeconds(time)).until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+
+    public static String encrypt(String strToEncrypt) {
+        try {
+            SecretKeySpec secretKey = new SecretKeySpec("testiniumproject".getBytes(),"AES");
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+            return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String decrypt(String strToDecrypt) {
+        try {
+            SecretKeySpec secretKey = new SecretKeySpec("testiniumproject".getBytes(),"AES");
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            cipher.init(Cipher.DECRYPT_MODE, secretKey);
+            return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
