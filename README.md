@@ -1,4 +1,4 @@
-# Test Automation Project
+# Finance App Project
 
 This is a test automation project implemented using Java, Selenium WebDriver, Cucumber, JUnit, and Page Object Model. The tests are designed to be executed on web applications, and the results are reported in both HTML and Cucumber-specific formats.
 
